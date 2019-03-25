@@ -15,14 +15,14 @@ class HistoryList extends React.Component {
             pageCount: 0,
             errorMessage: ''
         }
-    };
+    }
+
     componentDidMount() {
         this.fetchHistory();
     }
 
     fetchHistory (page=1) {
         this.setState({
-            historyList: [],
             errorMessage: ''
         });
         Api.get(`history/${page}`)
@@ -30,12 +30,12 @@ class HistoryList extends React.Component {
           this.setState({historyList: res.data.data, pageCount: res.data.numPages});
         })
         .catch(error => {
-          this.setState({errorMessage: error.message});
+          this.setState({historyList: [], errorMessage: error.message});
         });
     }
     handlePageClick = data => {
         this.fetchHistory(data.selected+1);
-    };
+    }
 
     renderTableRow (historyItem) {
         return (
