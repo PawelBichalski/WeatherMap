@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import WeatherDetail from "./WeatherDetail";
 
 import ReactPaginate from 'react-paginate';
 
@@ -39,13 +40,7 @@ class HistoryList extends React.Component {
     renderTableRow (historyItem) {
         return (
             <tr key={historyItem.id}>
-               <td>{historyItem.city.name}</td>
-               <td>{historyItem.latitude}, {historyItem.longitude}</td>
-               <td>{historyItem.temperature}</td>
-               <td>{historyItem.clouds}</td>
-               <td>{historyItem.wind}</td>
-               <td>{historyItem.description}</td>
-               <td>{historyItem.date}</td>
+                <WeatherDetail weatherData={historyItem} format={'table-row'} displayUnits={false} />
             </tr>
         )
     }

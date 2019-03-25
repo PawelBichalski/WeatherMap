@@ -26,7 +26,7 @@ class ModalDialog extends React.Component {
       {
           modalBody = this.props.errorMessage ?
               <div>{this.props.errorMessage}</div> :
-              <WeatherDetail weatherData={this.props.weatherData} />
+              <ul><WeatherDetail weatherData={this.props.weatherData} format={'single'} displayUnits={true} /></ul>
       }
       return (
         <Modal show={this.props.show} onHide={this.props.onModalClose}>

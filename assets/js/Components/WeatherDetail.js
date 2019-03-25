@@ -1,9 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import shortid from 'shortid';
 
 class WeatherDetail extends React.Component {
     static propTypes = {
-        weatherData: PropTypes.object
+        weatherData: PropTypes.object,
+        format: PropTypes.oneOf(['single', 'table-row']),
+        displayUnits: PropTypes.bool
+    }
+
+    createItem (title, value, unit='') {
+        if (!this.props.displayUnits) {
+            unit='';
+        }
+        if (this.props.format === 'single') {
+            return (
+                <li key={shortid.generate()}>{title}: {value} {unit}</li>
+            )
+        }
+        else {
+            return (
+                <td key={shortid.generate()}>{value} {unit}</td>
+            )
+        }
     }
 
     render() {
@@ -11,19 +30,16 @@ class WeatherDetail extends React.Component {
         if (!wData.city) {
             return null;
         }
-        return(
-        <div>
-            <ul>
-                <li>Miasto: {wData.city.name}</li>
-                <li>Współrzędne: {wData.latitude}, {wData.longitude}</li>
-                <li>Temperatura: {wData.temperature} C</li>
-                <li>Zachmurzenie: {wData.clouds} %</li>
-                <li>Wiatr: {wData.wind} m/s</li>
-                <li>Opis: {wData.description}</li>
-                <li>Data: {wData.date}</li>
-            </ul>
-        </div>
-    )}
+        return ([
+            this.createItem('Miasto', wData.city.name),
+            this.createItem('Współrzędne', `${wData.latitude}, ${wData.longitude}`),
+            this.createItem('Temperatura', wData.temperature, '°C'),
+            this.createItem('Zachmurzenie', wData.clouds, '%'),
+            this.createItem('Wiatr', wData.wind, 'm/s'),
+            this.createItem('Opis', wData.description),
+            this.createItem('Data', wData.date)
+        ]);
+    }
 }
 
 export default WeatherDetail;
