@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\ValueObject\Coordinates;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\WeatherDataRepository")
@@ -19,14 +20,9 @@ class WeatherData
     private $id;
 
     /**
-     * @ORM\Column(type="decimal", precision=12, scale=8)
+     * @ORM\Embedded(class="App\ValueObject\Coordinates")
      */
-    private $latitude;
-
-    /**
-     * @ORM\Column(type="decimal", precision=12, scale=8)
-     */
-    private $longitude;
+    private $coordinates;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\City",cascade={"persist"})
@@ -64,26 +60,14 @@ class WeatherData
         return $this->id;
     }
 
-    public function getLatitude()
+    public function getCoordinates()
     {
-        return $this->latitude;
+        return $this->coordinates;
     }
 
-    public function setLatitude($latitude): self
+    public function setCoordinates($coordinates): self
     {
-        $this->latitude = $latitude;
-
-        return $this;
-    }
-
-    public function getLongitude()
-    {
-        return $this->longitude;
-    }
-
-    public function setLongitude($longitude): self
-    {
-        $this->longitude = $longitude;
+        $this->coordinates = $coordinates;
 
         return $this;
     }

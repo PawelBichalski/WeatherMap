@@ -9,6 +9,7 @@
 namespace App\Controller\Api;
 
 
+use App\ValueObject\Coordinates;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use App\Service\OpenWeatherService;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,7 +24,7 @@ class OpenWeatherController extends AbstractFOSRestController
     public function openWeatherAction ($latitude, $longitude, OpenWeatherService $openWeatherService)
     {
         try {
-            $weatherData = $openWeatherService->fetchData($latitude, $longitude);
+            $weatherData = $openWeatherService->fetchData(new Coordinates($latitude, $longitude));
         }
         catch (\Exception $e) {
             $view = $this->view (

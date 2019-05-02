@@ -8,6 +8,7 @@
 
 namespace App\Service;
 
+use App\ValueObject\Coordinates;
 use Doctrine\ORM\EntityManagerInterface;
 
 use App\Entity\City;
@@ -24,12 +25,12 @@ class OpenWeatherService
         $this->apiKey = $apiKey;
     }
 
-    public function fetchData ($latitude, $longitude) : ?WeatherData
+    public function fetchData (Coordinates $coordinates) : ?WeatherData
     {
         $headers = ['Accept' => 'application/json'];
         $query = [
-            'lat' => $latitude,
-            'lon' => $longitude,
+            'lat' => $coordinates->getLatitude(),
+            'lon' => $coordinates->getLongitude(),
             'units' => 'metric',
             'APPID' => $this->apiKey
         ];
@@ -62,8 +63,10 @@ class OpenWeatherService
         }
 
         $weatherData = new WeatherData();
-        $weatherData->setLatitude($data['coord']['lat']);
-        $weatherData->setLongitude($data['coord']['lon']);
+        $weatherData->setCoordinates(new Coordinates(
+            $data['coord']['lat'],
+            $data['coord']['lon']
+        ));
         $weatherData->setCity($city);
         $weatherData->setTemperature($data['main']['temp']);
         $weatherData->setClouds($data['clouds']['all']);
