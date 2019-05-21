@@ -49,7 +49,7 @@ class WeatherMap extends React.Component {
         <div>
           <Map
               onMapClick={this.mapClickHandler}
-              googleMapURL={"https://maps.googleapis.com/maps/api/js?key=AIzaSyCvlyz9oPpvGGrkvKYxsXBBy8OCxnfjYOY&v=3.exp&libraries=geometry"}
+              googleMapURL={"https://maps.googleapis.com/maps/api/js?key=GOOGLE_API_KEY&v=3.exp&libraries=geometry"}
           />
           <ModalDialog
               show={this.state.isModalOpen}
