@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Entity;
+namespace App\Domain\Model\Weather;
 
+use App\Domain\Model\City\City;
 use Doctrine\ORM\Mapping as ORM;
-use App\ValueObject\Coordinates;
+use App\Domain\ValueObject\Coordinates;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\WeatherDataRepository")
@@ -20,12 +21,12 @@ class WeatherData
     private $id;
 
     /**
-     * @ORM\Embedded(class="App\ValueObject\Coordinates")
+     * @ORM\Embedded(class="App\Domain\ValueObject\Coordinates")
      */
     private $coordinates;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\City",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="App\Domain\Model\City\City",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $city;
@@ -60,7 +61,7 @@ class WeatherData
         return $this->id;
     }
 
-    public function getCoordinates()
+    public function getCoordinates(): Coordinates
     {
         return $this->coordinates;
     }
@@ -151,5 +152,4 @@ class WeatherData
     {
         $this->date = new \DateTime();
     }
-
 }

@@ -32,7 +32,7 @@ class WeatherDetail extends React.Component {
         }
         return ([
             this.createItem('Miasto', wData.city.name),
-            this.createItem('Współrzędne', `${wData.coordinates.latitude}, ${wData.coordinates.longitude}`),
+            this.createItem('Współrzędne', `${wData.latitude}, ${wData.longitude}`),
             this.createItem('Temperatura', wData.temperature, '°C'),
             this.createItem('Zachmurzenie', wData.clouds, '%'),
             this.createItem('Wiatr', wData.wind, 'm/s'),

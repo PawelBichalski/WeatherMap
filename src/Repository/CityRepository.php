@@ -2,8 +2,8 @@
 
 namespace App\Repository;
 
-use App\Entity\City;
-use App\Entity\WeatherData;
+use App\Domain\Model\City\City;
+use App\Domain\Model\Weather\WeatherData;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\AST\Join;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -21,11 +21,11 @@ class CityRepository extends ServiceEntityRepository
         parent::__construct($registry, City::class);
     }
 
-    public function findMostPopularCity ()
+    public function findMostPopularCity()
     {
         $queryBuilder = $this->createQueryBuilder('c')
             ->innerJoin(WeatherData::class, 'd')
-            ->select('c, COUNT(DISTINCT d.id) AS numData')
+            ->select('c AS city, COUNT(DISTINCT d.id) AS numData')
             ->andWhere('c.id=d.city')
             ->groupBy('d.city')
             ->orderBy('numData', 'DESC')
@@ -33,33 +33,4 @@ class CityRepository extends ServiceEntityRepository
 
         return $queryBuilder->getQuery()->getOneOrNullResult();
     }
-
-    // /**
-    //  * @return City[] Returns an array of City objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?City
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

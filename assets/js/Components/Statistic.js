@@ -30,19 +30,19 @@ class Statistic extends React.Component {
         return <div>Brak danych</div>;
     }
     const statData = this.state.statData;
-    const roundAvgTemp = Math.round(100*statData.temperature.avgTemperature)/100;
+    const roundAvgTemp = Math.round(100*statData.temperature.avg)/100;
 
     return(
         <div>
             <ul>
                 <li>Temperatura
                     <ul>
-                        <li>minimalna: {statData.temperature.minTemperature}</li>
-                        <li>maksymalna: {statData.temperature.maxTemperature}</li>
+                        <li>minimalna: {statData.temperature.min}</li>
+                        <li>maksymalna: {statData.temperature.max}</li>
                         <li>średnia: {roundAvgTemp}</li>
                     </ul>
                 </li>
-                <li>Najczęściej wyszukiwane miasto: {statData.mostPopularCity[0].name} ({statData.mostPopularCity.numData})</li>
+                <li>Najczęściej wyszukiwane miasto: {statData.mostPopularCity.city.name} ({statData.mostPopularCity.numData})</li>
                 <li>Ilość łącznych wyszukiwań: {statData.dataCount}</li>
             </ul>
         </div>

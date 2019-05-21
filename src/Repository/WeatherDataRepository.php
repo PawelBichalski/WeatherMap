@@ -2,8 +2,8 @@
 
 namespace App\Repository;
 
-use App\Entity\City;
-use App\Entity\WeatherData;
+use App\Domain\Model\Weather\WeatherData;
+use App\Domain\Model\City\City;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Pagerfanta\Pagerfanta;
@@ -22,7 +22,7 @@ class WeatherDataRepository extends ServiceEntityRepository
         parent::__construct($registry, WeatherData::class);
     }
 
-    public function findLatest (int $page=1, int $pageSize=10): Pagerfanta
+    public function findLatest(int $page = 1, int $pageSize = 10): Pagerfanta
     {
         $queryBuilder = $this->createQueryBuilder('d')
             ->join(City::class, 'c')
@@ -35,7 +35,7 @@ class WeatherDataRepository extends ServiceEntityRepository
         return $paginator;
     }
 
-    public function getTemperatureStat ()
+    public function getTemperatureStat()
     {
         $queryBuilder = $this->createQueryBuilder('s');
         $queryBuilder->select([
@@ -47,33 +47,4 @@ class WeatherDataRepository extends ServiceEntityRepository
 
         return $queryBuilder->getQuery()->getOneOrNullResult();
     }
-
-    // /**
-    //  * @return WeatherData[] Returns an array of WeatherData objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('w')
-            ->andWhere('w.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('w.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?WeatherData
-    {
-        return $this->createQueryBuilder('w')
-            ->andWhere('w.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

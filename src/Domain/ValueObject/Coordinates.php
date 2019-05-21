@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\ValueObject;
+namespace App\Domain\ValueObject;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -45,10 +45,10 @@ class Coordinates
 
     public function __toString()
     {
-       return $this->latitude.', '.$this->longitude;
+        return $this->latitude.', '.$this->longitude;
     }
 
-    public function equals (Coordinates $coordinates)
+    public function equals(Coordinates $coordinates)
     {
         return ((string) $this) === ((string) $coordinates);
     }
