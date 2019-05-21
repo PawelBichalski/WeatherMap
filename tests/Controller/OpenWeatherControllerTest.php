@@ -10,7 +10,6 @@ namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-
 class OpenWeatherControllerTest extends WebTestCase
 {
 
@@ -21,7 +20,9 @@ class OpenWeatherControllerTest extends WebTestCase
         $lat = 50.32 + (rand(0, 410)/100);
         $lng = 15.41+ (rand(0, 760)/100);
 
-        $client->request ('GET', '/api/openweather/'.$lat.'/'.$lng,
+        $client->request(
+            'GET',
+            '/api/openweather/'.$lat.'/'.$lng,
             array(),
             array(),
             array('CONTENT_TYPE' => 'application/json'),

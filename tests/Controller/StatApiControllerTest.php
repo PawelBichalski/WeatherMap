@@ -17,7 +17,9 @@ class StatApiControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request ('GET', '/api/stat',
+        $client->request(
+            'GET',
+            '/api/stat',
             array(),
             array(),
             array('CONTENT_TYPE' => 'application/json'),

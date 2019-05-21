@@ -17,7 +17,9 @@ class HistoryApiControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request ('GET', '/api/history/1',
+        $client->request(
+            'GET',
+            '/api/history/1',
             array(),
             array(),
             array('CONTENT_TYPE' => 'application/json'),
