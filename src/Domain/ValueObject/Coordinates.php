@@ -28,7 +28,7 @@ class Coordinates
         $this->latitude = $latitude;
 
         if (empty($longitude) || abs(floatval($longitude)) > 180) {
-            throw new \InvalidArgumentException('Logitude should be between -180 and 180');
+            throw new \InvalidArgumentException('Longitude should be between -180 and 180');
         }
         $this->longitude = $longitude;
     }
