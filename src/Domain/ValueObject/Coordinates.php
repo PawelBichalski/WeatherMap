@@ -22,7 +22,7 @@ class Coordinates
 
     public function __construct(string $latitude, string $longitude)
     {
-        if (empty ($latitude) || abs(floatval($latitude)) > 90) {
+        if (empty($latitude) || abs(floatval($latitude)) > 90) {
             throw new \InvalidArgumentException('Latitude should be between -90 and 90');
         }
         $this->latitude = $latitude;
@@ -59,4 +59,3 @@ class Coordinates
         return ((string) $this) === ((string) $coordinates);
     }
 }
-

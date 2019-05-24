@@ -44,8 +44,8 @@ class CoordinatesTest extends TestCase
     public function testConstructValid(string $latitude, string $longitude)
     {
         $coordinate = new Coordinates($latitude, $longitude);
-        $this->assertEquals ($latitude, $coordinate->getLatitude());
-        $this->assertEquals ($longitude, $coordinate->getLongitude());
+        $this->assertEquals($latitude, $coordinate->getLatitude());
+        $this->assertEquals($longitude, $coordinate->getLongitude());
     }
 
     /**
@@ -79,6 +79,5 @@ class CoordinatesTest extends TestCase
             ['-90.00', '-180.01'],
             ['90.01', '180.00']
         ];
-
     }
 }
